@@ -1,0 +1,10 @@
+1-if-_
+2-True-_
+3-False-_
+4-True:-_
+5-False:-_
+6-not-_
+7-or-_
+8-and-_
+9-OR-_
+10-AND-_

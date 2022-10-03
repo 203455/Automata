@@ -1,0 +1,37 @@
+Para poder usar el validador de Sentencias necesitas tener previamente definido tu autómata
+y sus transiciones, ya que gracias a ello podemos definir la información que el programa usará
+para validar sentencias. 
+
+El programa precisa de 3 archivos .txt, todos igual de importantes. Se listarán a continuación, seguido
+de su correcta forma de escritura.
+
+1.- transiciones.txt:
+    Este documento es donde se incluirán todas las transiciones del autómata, dentro de este archivo se
+    encuentra el estado donde está primero, el valor de la transición y el estado donde culmina. 
+    Las transicionesse empiezan a escribir desde la primera linea y se escriben con la siguiente estructura: 
+
+        Estado inicial-Valor de la transición-Estado en el que culmina-
+
+    Nota. Es necesario que termine con un "-", puesto que delimita el nombre del estado deonde culmina. 
+
+2.- diccionario.txt:
+    Este documento incluye las palabras reservadas que se encuentran dentro del vocabulario de nuestro
+    autómata, puesto que el programa identifica caracteres ordinarios como ":", "/", "$", etc. Es necesario
+    un diccionario de palabras que el programa va ideantificar y entenderá que si dicha palabra está presente, 
+    no la debe separar en caracteres. Las palabras del diccionario empiezan a escribirse desde la primer línea
+    y la estructura es la siguiente. 
+
+        Número de lista-palabra-_
+
+    Nota. Es necesario que termine con un "-_", puesto que termina identificando la posicion de la palabra.
+
+3.- parametros.txt:
+    Este documento incluye una lista con el Estado de inicio y los estados que pueden ser el final. Dicha lista
+    empieza desde la primera línea del documento y su estructura es la siguiente: 
+
+        Tipo de estado-Estado-
+
+    Nota. Es necesario que termine con un "-", puesto que delimita el nombre del estado.
+
+
+Con estos documentos bien estructurados el programa pretende no tener problema con la lectura de sentencias. 
