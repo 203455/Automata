@@ -1,24 +1,41 @@
-
-
 items = []
 transiciones = []
+diccionario = []
 
-
+    
 
 def capturarTransiciones():
-    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones2.txt", "r") as archivo:
+    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneralconDiccionario/transiciones2.txt", "r") as archivo:
         for linea in archivo:
             transiciones.append(str(linea))
 
+def obtenerDiccionario():
+    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneralconDiccionario/diccionario2.txt", "r") as archivo:
+        for linea in archivo:
+            palabra=linea.split("-")
+            diccionario.append(str(palabra[1]))
+
+def comparar(item):
+    for dicc in diccionario:
+        if str(item) == str(dicc):
+            return True
+    return False
+
 def obtenerSentencia():
+    obtenerDiccionario()
     sentencia = input("Ingresa tu sentencia \n")
-    for i in sentencia:
-        items.append(i)
+    palabras = sentencia.split()
+    for i in palabras:
+        if comparar(i):
+            items.append(i)
+        else:
+            for caracter in i:
+                items.append(caracter)
     validarSentencia()
 
 def obtenerParametros():
     parametros = []
-    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros.txt", "r") as archivo:
+    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneralconDiccionario/parametros.txt", "r") as archivo:
         for linea in archivo:
             palabra=linea.split("-")
             parametros.append(str(palabra[1]))
@@ -61,12 +78,12 @@ def validarSentencia():
     if correcto == True:
         for fin in finales:
             if actual == fin:
-                print("Sentencia if valida")
+                print("Sentencia valida")
                 break
         else:
-            print("Sentencia if invalida")
+            print("Sentencia invalida")
     else:
-        print("Hubo un error, lo ingresado no es valido en el autómata")
+        print("Hubo un error, lo ingresado no es valido en el autómata (no encontró la ruta adecuada)")
                     
         
 
