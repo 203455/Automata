@@ -1,5 +1,4 @@
 
-
 items = []
 transiciones = []
 
@@ -10,11 +9,13 @@ def capturarTransiciones():
         for linea in archivo:
             transiciones.append(str(linea))
 
-def obtenerSentencia():
-    sentencia = input("Ingresa tu sentencia \n")
-    for i in sentencia:
-        items.append(i)
-    print(items)
+def particionarSentencia(bloque):
+    items.clear()
+    for sentencia in bloque:
+        for i in sentencia:
+            items.append(i)
+        print(items)
+    return True
     #validarSentencia()
 
 def obtenerParametros():
@@ -68,11 +69,4 @@ def validarSentencia():
             print("Sentencia if invalida")
     else:
         print("Hubo un error, lo ingresado no es valido en el autómata")
-                    
-        
-
-
-        
-
-if __name__ == "__main__":
-    obtenerSentencia()
+                

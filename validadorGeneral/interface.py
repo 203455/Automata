@@ -1,7 +1,13 @@
 from ast import Str
+from cProfile import label
+from cgitb import text
 from re import T
 from tkinter import *
 from tkinter import filedialog
+
+from validador import particionarSentencia
+
+automatasDatos = []
 
 sentencias = []
 bloquesIf = []
@@ -12,9 +18,6 @@ root.resizable(0,0)
 root.geometry("500x400")
 
 
-
-def evaluar():
-    pass
 
 def dividirBloques():
     for n in range(len(sentencias)):
@@ -35,7 +38,25 @@ def dividirBloques():
     print(bloquesIf)
     evaluar()
         
+def imprimirResultado(valor, bloque):
+    texto = ""
+    for linea in bloque:
+        texto=texto+linea
+    labelResultado = Label(root)
+    frame = Frame(root)
+    labelBloque = Label(frame, anchor="e", justify=LEFT)
+    if valor == True:
+        labelResultado.config(text="APROBADO", fg="green")
+        labelResultado.pack()
+        frame.pack()
+        labelBloque.config(text=texto)
+        labelBloque.pack()
 
+
+def evaluar():
+    for bloque in bloquesIf:
+        valor = particionarSentencia(bloque)
+        imprimirResultado(valor, bloque)
 
 def leerArchivo(archivo):
     encontrado=False 
@@ -56,10 +77,11 @@ def leerArchivo(archivo):
                 
 
 def subirArchivo():
+    botonSubir.config(state="disabled")
     archivo = filedialog.askopenfilename(title="abrir", filetypes=(("Archivos Python","*.py"),("Todos los archivos", "*.*")))
     leerArchivo(archivo)
 
-indicaciones = Label(root,text="Ingresa el archivo python con sentencias if")
+indicaciones = Label(root,text="Ingresa el archivo python con sentencias if", pady=10)
 indicaciones.pack()
 botonSubir = Button(root, text="Subir Archivo", command=subirArchivo)
 botonSubir.pack()
