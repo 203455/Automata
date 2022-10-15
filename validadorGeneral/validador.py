@@ -14,7 +14,8 @@ def obtenerSentencia():
     sentencia = input("Ingresa tu sentencia \n")
     for i in sentencia:
         items.append(i)
-    validarSentencia()
+    print(items)
+    #validarSentencia()
 
 def obtenerParametros():
     parametros = []
