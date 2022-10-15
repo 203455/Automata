@@ -1,3 +1,5 @@
+from ast import Str
+from re import T
 from tkinter import *
 from tkinter import filedialog
 
@@ -9,22 +11,29 @@ root.title('IF VALIDATOR')
 root.resizable(0,0)
 root.geometry("500x400")
 
+
+
+def evaluar():
+    pass
+
 def dividirBloques():
-    auxiliar = []
-    for sentencia in range(len(sentencias)):
-        if sentencias[sentencia].startswith('if'):
-            auxiliar.append(sentencias[sentencia])
-            parar = False
+    for n in range(len(sentencias)):
+        auxiliar = []
+        if sentencias[n].startswith('if'):
+            auxiliar.append(sentencias[n])
             i=1
-            while parar == False:
-                if sentencias[sentencia].startswith('if'):
-                    parar = True
+            print("FALTAN POR RECORRER. "+str(len(sentencias)-n))
+            while i < (len(sentencias)-n):
+                if sentencias[n+i].startswith('if'):
+                    i=len(sentencias)
+                    break
                 else:
-                    auxiliar.append(sentencias[sentencia+i])
+                    auxiliar.append(sentencias[n+i])
                     i=i+1
+            print(auxiliar)  
             bloquesIf.append(auxiliar)
-            auxiliar.clear()
     print(bloquesIf)
+    evaluar()
         
 
 
