@@ -1,14 +1,18 @@
 
+from curses import flash
+
+
 items = []
 transiciones = []
 
-elseChacker = False
+ifChecker = False
+elseChecker = False
 cuerpo = False
+passChecker = False
 
 
-
-def capturarTransiciones():
-    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones2.txt", "r") as archivo:
+def capturarTransiciones(indicador):
+    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones"+str(indicador)+".txt", "r") as archivo:
         for linea in archivo:
             transiciones.append(str(linea))
 
@@ -17,20 +21,32 @@ def particionarSentencia(bloque):
         items.clear()
         for i in sentencia:
             items.append(i)
-        validarSentencia()
+        if ifChecker == False:
+            ifChecker = True
+            validarSentencia(1)
+        elif cuerpo == False:
+            validarSentencia(2)
+        elif elseChecker == False:
+            elseChecker = True
+            cuerpo = False
+            validarSentencia(3)
+        else:
+            cuerpo = False
+            validarSentencia(4)
     return True
 
-def obtenerParametros():
+def obtenerParametros(indicador):
     parametros = []
-    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros.txt", "r") as archivo:
+    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros"+str(indicador)+".txt", "r") as archivo:
         for linea in archivo:
             palabra=linea.split("-")
             parametros.append(str(palabra[1]))
     return parametros
 
-def validarSentencia():
-    capturarTransiciones()
-    parametros = obtenerParametros()
+def validarSentencia(indicador):
+    resultado = False
+    capturarTransiciones(indicador)
+    parametros = obtenerParametros(indicador)
     inicial = str(parametros[0])
     finales = []
     inicio = 0
@@ -66,9 +82,18 @@ def validarSentencia():
         for fin in finales:
             if actual == fin:
                 print("Sentencia if valida")
+                resultado = True
                 break
         else:
             print("Sentencia if invalida")
     else:
         print("Hubo un error, lo ingresado no es valido en el autómata")
-                
+    
+    if indicador == 1:
+        if actual == 'q100' or actual == 'q101':
+                elseChecker = True
+    elif indicador == 2:
+        if actual == 'q7' or actual == 'q58':
+            cuerpo = True
+        
+        
