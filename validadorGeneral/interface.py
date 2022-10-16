@@ -44,7 +44,7 @@ def imprimirResultado(valor, bloque):
         texto=texto+linea
     labelResultado = Label(root)
     frame = Frame(root)
-    labelBloque = Label(frame, anchor="e", justify=LEFT)
+    labelBloque = Label(frame, anchor="e", justify=LEFT )
     if valor == True:
         labelResultado.config(text="APROBADO", fg="green")
         labelResultado.pack()
