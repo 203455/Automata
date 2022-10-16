@@ -2,6 +2,9 @@
 items = []
 transiciones = []
 
+elseChacker = False
+cuerpo = False
+
 
 
 def capturarTransiciones():
@@ -10,13 +13,12 @@ def capturarTransiciones():
             transiciones.append(str(linea))
 
 def particionarSentencia(bloque):
-    items.clear()
     for sentencia in bloque:
+        items.clear()
         for i in sentencia:
             items.append(i)
-        print(items)
+        validarSentencia()
     return True
-    #validarSentencia()
 
 def obtenerParametros():
     parametros = []
