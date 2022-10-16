@@ -1,5 +1,6 @@
 from ast import Str
 from cProfile import label
+from cgi import print_directory
 from cgitb import text
 from re import T
 from tkinter import *
@@ -47,14 +48,18 @@ def imprimirResultado(valor, bloque):
     labelBloque = Label(frame, anchor="e", justify=LEFT )
     if valor == True:
         labelResultado.config(text="APROBADO", fg="green")
-        labelResultado.pack()
-        frame.pack()
-        labelBloque.config(text=texto)
-        labelBloque.pack()
+    if valor == False:
+        labelResultado.config(text="RECHAZADO", fg="red")
+    labelResultado.pack()
+    frame.pack()
+    labelBloque.config(text=texto)
+    labelBloque.pack()
+        
 
 
 def evaluar():
     for bloque in bloquesIf:
+        print("EVALUAR")
         valor = particionarSentencia(bloque)
         imprimirResultado(valor, bloque)
 

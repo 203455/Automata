@@ -1,47 +1,69 @@
-
-from curses import flash
+from cgitb import reset
 
 
 items = []
 transiciones = []
 
-ifChecker = False
-elseChecker = False
-cuerpo = False
-passChecker = False
+transicionesUrls = ["D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones1.txt",
+                    "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones2.txt",
+                    "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones3.txt",
+                    "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones4.txt"]
 
-validar = True
+parametrossUrls = ["D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros1.txt",
+                    "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros2.txt",
+                    "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros3.txt",
+                    "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros4.txt"]
+
+class validaciones:
+    def __init__(self):
+        self.ifChecker = False
+        self.elseChecker = False
+        self.cuerpo = False
+        self.passChecker = False
+        self.validar = True
+
+validador = validaciones()
 
 
 def capturarTransiciones(indicador):
-    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones"+str(indicador)+".txt", "r") as archivo:
+    transiciones.clear()
+    with open(transicionesUrls[indicador-1], "r") as archivo:
         for linea in archivo:
             transiciones.append(str(linea))
 
+def resetValidador():
+    validador.ifChecker = False
+    validador.elseChecker = False
+    validador.cuerpo = False
+    validador.passChecker = False
+    validador.validar = True
+
 def particionarSentencia(bloque):
+    resetValidador()
     for sentencia in bloque:
         items.clear()
         for i in sentencia:
             items.append(i)
-        if validar == True:
-            if ifChecker == False:
-                ifChecker = True
-                validar = validarSentencia(1)
-            elif cuerpo == False:
-                validar = validarSentencia(2)
-            elif elseChecker == False:
-                cuerpo = False
+        print(items)
+        if validador.validar == True:
+            if validador.ifChecker == False:
+                validador.ifChecker = True
+                validador.validar = validarSentencia(1)
+            elif validador.cuerpo == False:
+                validador.validar = validarSentencia(2)
+            elif validador.elseChecker == False:
+                validador.cuerpo = False
                 if sentencia.starswith('els'):
-                    elseChecker = True
-                    validar = validarSentencia(3)
+                    validador.elseChecker = True
+                    validador.validar = validarSentencia(3)
                 else:
-                    validar = validarSentencia(4)
+                    validador.validar = validarSentencia(4)
                 
-    return validar
+    return validador.validar
 
 def obtenerParametros(indicador):
     parametros = []
-    with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/parametros"+str(indicador)+".txt", "r") as archivo:
+    with open(parametrossUrls[indicador-1], "r") as archivo:
         for linea in archivo:
             palabra=linea.split("-")
             parametros.append(str(palabra[1]))
@@ -66,12 +88,16 @@ def validarSentencia(indicador):
     
     while finalizar == False:
         correcto = False
-        print("Estado actual: "+actual+" Valor actual: "+items[contador])
+        print("Estado actual: " + actual + " Valor actual: "+ str(items[contador]))
+        
         
         for transicion in transiciones:
             t=transicion.split("-")
             if actual == t[0]:
-                if items[contador] == t[1]:
+                print(t[0]+t[1]+t[2])
+                if str(items[contador]) == '\n':
+                    items[contador] = 'tab'
+                if str(items[contador]) == str(t[1]):
                     actual=t[2]
                     contador=contador+1
                     correcto=True
@@ -95,11 +121,10 @@ def validarSentencia(indicador):
     
     if indicador == 1:
         if actual == 'q100' or actual == 'q101':
-                elseChecker = True
+                validador.elseChecker = True
     elif indicador == 2:
         if actual == 'q7' or actual == 'q58':
-            cuerpo = True
-            
+            validador.cuerpo = True
     return resultado
         
         
