@@ -10,6 +10,8 @@ elseChecker = False
 cuerpo = False
 passChecker = False
 
+validar = True
+
 
 def capturarTransiciones(indicador):
     with open("D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones"+str(indicador)+".txt", "r") as archivo:
@@ -21,19 +23,21 @@ def particionarSentencia(bloque):
         items.clear()
         for i in sentencia:
             items.append(i)
-        if ifChecker == False:
-            ifChecker = True
-            validarSentencia(1)
-        elif cuerpo == False:
-            validarSentencia(2)
-        elif elseChecker == False:
-            elseChecker = True
-            cuerpo = False
-            validarSentencia(3)
-        else:
-            cuerpo = False
-            validarSentencia(4)
-    return True
+        if validar == True:
+            if ifChecker == False:
+                ifChecker = True
+                validar = validarSentencia(1)
+            elif cuerpo == False:
+                validar = validarSentencia(2)
+            elif elseChecker == False:
+                cuerpo = False
+                if sentencia.starswith('els'):
+                    elseChecker = True
+                    validar = validarSentencia(3)
+                else:
+                    validar = validarSentencia(4)
+                
+    return validar
 
 def obtenerParametros(indicador):
     parametros = []
@@ -95,5 +99,7 @@ def validarSentencia(indicador):
     elif indicador == 2:
         if actual == 'q7' or actual == 'q58':
             cuerpo = True
+            
+    return resultado
         
         
