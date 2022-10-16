@@ -53,7 +53,7 @@ def particionarSentencia(bloque):
                 validador.validar = validarSentencia(2)
             elif validador.elseChecker == False:
                 validador.cuerpo = False
-                if sentencia.starswith('els'):
+                if items[2] == 's':
                     validador.elseChecker = True
                     validador.validar = validarSentencia(3)
                 else:

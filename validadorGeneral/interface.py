@@ -15,7 +15,7 @@ bloquesIf = []
 
 root = Tk()
 root.title('IF VALIDATOR')
-root.resizable(0,0)
+root.resizable(0,1)
 root.geometry("500x400")
 
 
