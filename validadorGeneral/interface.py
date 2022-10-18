@@ -5,7 +5,7 @@ from cgitb import text
 from re import T
 from tkinter import *
 from tkinter import filedialog
-
+import requests
 from validador import particionarSentencia
 
 automatasDatos = []
@@ -85,10 +85,17 @@ def subirArchivo():
     botonSubir.config(state="disabled")
     archivo = filedialog.askopenfilename(title="abrir", filetypes=(("Archivos Python","*.py"),("Todos los archivos", "*.*")))
     leerArchivo(archivo)
+    
+def descargarArchivo():
+    url = '7d/CONSIDERACIONES.pdf'
+    myfile = requests.get(url)
+    open('/d/7mo Cuatri/Lenguajes y Automatas/Automata/Reglas.pdf', 'wb').write(myfile.content)
 
 indicaciones = Label(root,text="Ingresa el archivo python con sentencias if", pady=10)
 indicaciones.pack()
 botonSubir = Button(root, text="Subir Archivo", command=subirArchivo)
 botonSubir.pack()
+botonDescarga = Button(root, text="Descargar reglas", command=descargarArchivo)
+botonDescarga.pack()
 
 root.mainloop()
