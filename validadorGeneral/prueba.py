@@ -2,6 +2,7 @@ dragon = "Gorila"
 
 if 3 > 2:
     print("Ha entrado en el if correctamente")
+    pass
 elif 3 == 0:
     print("NO PUEDE ENTRAR AQUI")
     pass
@@ -15,7 +16,7 @@ if dragon == "Comodo":
     pass
 
 if 3 > 2:
-    print("Ha entrado en el if correctamente")
+    print("Ha entrado en el if correctamente" + str(dragon))
     pass
 elif 3 == 0:
     print("NO PUEDE ENTRAR AQUI")

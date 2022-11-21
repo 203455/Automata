@@ -21,7 +21,7 @@ def comparar(item):
             return True
     return False
 
-def obtenerSentencia():
+def obtenerSentencia(dato):
     obtenerDiccionario()
     sentencia = input("Ingresa tu sentencia \n")
     palabras = sentencia.split()
@@ -91,4 +91,5 @@ def validarSentencia():
         
 
 if __name__ == "__main__":
-    obtenerSentencia()
+    obtenerSentencia("Hola")
+    pass

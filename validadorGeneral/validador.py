@@ -4,6 +4,8 @@ from cgitb import reset
 items = []
 transiciones = []
 
+#Las siguientes direcciones deben ser cambiadas según sea el caso de usabilidad de manera local
+
 transicionesUrls = ["D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones1.txt",
                     "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones2.txt",
                     "D:/7mo Cuatri/Lenguajes y Automatas/Automata/validadorGeneral/transiciones3.txt",
