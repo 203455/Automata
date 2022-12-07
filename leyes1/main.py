@@ -1,6 +1,7 @@
 from nltk import CFG
 from nltk import ChartParser
-from nltk.tree import ParentedTree
+from nltk.parse.generate import generate
+import random
 
 
 cadenaEntrada = []
@@ -80,8 +81,6 @@ def mt(indicador):
     while finalizar == False:
         correcto = False
         
-        print("Estado inicial" + actual + " Posicion 1 " + str(posicion1) + " Posicion 2 " + str(posicion2) + " POsicion 3 " + str(posicion3) + " Valor 1 " + cadenaEntrada[posicion1] + " " + cadenaSalida[posicion2] + " " + cadenaAuxiliar[posicion3] )
-        
         if cintas == '2':
             for transicion in transiciones:
                 t=transicion.split("-")
@@ -153,22 +152,31 @@ def mt(indicador):
             finalizar=True
     
     if correcto == True:
-        print(cadenaSalida)
+        resultado =  []
+        result = ""
+        for item in cadenaSalida:
+            if item != "0":
+                resultado.append(item)
+            else:
+                break
+        result= ''.join(resultado)
+        return result
     else:
         print('No es posible')
+        return "No es posible hacer la operación"
 
 
 def obtenerSentencia(tipo, sentencia):
     for i in sentencia:
         if i != " ":
             items.append(i)
-    print(items)
-    validar(tipo)
+    resultado = validar(tipo)
+    return resultado
     
 
-grammar = CFG.fromstring("""
+grammarOficial = CFG.fromstring("""
     E -> L
-    L -> I | N I | N L | I O I | P I O I F | P I F | P L O L F O L | L O P L O L F 
+    L -> P I O I F O I | P I O I F  | P I F | P L O L F O L | L O P L O L F | I | I O I | N I | N L 
     I -> 'A' | 'B' | 'C' | 'D' | 'Z' | 'E'
     N -> '!' 
     P -> '('
@@ -176,21 +184,48 @@ grammar = CFG.fromstring("""
     O -> 'u' | 'n' | 
 """)
 
+grammarCorto = CFG.fromstring("""
+    E -> L
+    L -> I  | I O I | P I O I F O I | P I O I F  | P I F | P L O L F O L | L O P L O L F |  N I | N L 
+    I -> 'A' | 'B' | 'C' | 'D' | 'Z' | 'E'
+    N -> '!' 
+    P -> '('
+    F -> ')'
+    O -> 'u' | 'n' | 
+""")
+
+
 def validar(tipo):
+    num1 = random.randint(1,70)
+    num2 = random.randint(71,100)
+    iteracion = 0
+    otros = []
     valor = False
-    parser = ChartParser(grammar)
+    parser = ChartParser(grammarOficial)
     sentencia = []
     for tree in parser.parse(items): 
         valor = True
-        sentencia.append(tree)
-        print(tree)
-    print(sentencia)
+        sentencia.append(str(tree))
+    if tipo > 3:
+        for s in generate(grammarCorto, n=300):
+            if iteracion == num1 or iteracion==num2:
+                otros.append(s)
+            iteracion = iteracion + 1
+    else:
+        for s in generate(grammarOficial, n=300):
+            if iteracion == num1 or iteracion==num2:
+                otros.append(s)
+            iteracion = iteracion + 1
     if valor == True: 
-        mt(tipo)
+        resultado = mt(tipo)
+        return [resultado, "".join(otros[0]), "".join(otros[1])]
+    
+    return  ["No es posible obtener sentencia", otros[0], otros[1]]
         
 
 
 
 if __name__ == "__main__":
-    obtenerSentencia(3, '((AnB)uC)nD')
+    resultados = obtenerSentencia(4, 'AnZ')
+    print(resultados)
     pass
