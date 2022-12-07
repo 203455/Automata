@@ -218,9 +218,9 @@ def validar(tipo):
             iteracion = iteracion + 1
     if valor == True: 
         resultado = mt(tipo)
-        return [resultado, "".join(otros[0]), "".join(otros[1])]
+        return [[resultado, True], ["".join(otros[0]), False], ["".join(otros[1]), False]]
     
-    return  ["No es posible obtener sentencia", otros[0], otros[1]]
+    return  [["No es posible obtener sentencia",True], ["".join(otros[0]), False],["".join(otros[0]), False]]
         
 
 
