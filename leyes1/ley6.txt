@@ -1,0 +1,16 @@
+Q1-A-0-Q2-A-A-D-S-
+Q1-B-0-Q2-B-B-D-S-
+Q1-C-0-Q2-C-C-D-S-
+Q1-D-0-Q2-D-D-D-S-
+Q2-u-A-Q3-u-A-D-S-
+Q2-u-B-Q3-u-B-D-S-
+Q2-u-C-Q3-u-C-D-S-
+Q2-u-D-Q3-u-D-D-S-
+Q2-n-A-Q3-n-A-D-S-
+Q2-n-B-Q3-n-B-D-S-
+Q2-n-C-Q3-n-C-D-S-
+Q2-n-D-Q3-n-D-D-S-
+Q3-A-A-Q4-A-A-S-S-
+Q3-B-B-Q4-B-B-S-S-
+Q3-C-C-Q4-C-C-S-S-
+Q3-D-D-Q4-D-D-S-S-
