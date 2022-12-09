@@ -90,11 +90,11 @@ q32-S-B-0-0-q33-S-B-0-S-D-S-S-D-s-
 q32-T-B-0-0-q33-T-B-0-T-D-S-S-D-s-
 q33-u-B-0-0-q34-u-B-0-u-D-S-S-D-s-
 q33-n-B-0-0-q34-n-B-0-n-D-S-S-D-s-
-q34-(-B-0-0-q32-(-B-0-)-D-S-S-D-M-
-q34-Q-B-0-0-q35-Q-B-Q-0-D-S-S-D-s-
-q34-R-B-0-0-q35-R-B-R-0-D-S-S-D-s-
-q34-S-B-0-0-q35-S-B-S-0-D-S-S-D-s-
-q34-T-B-0-0-q35-T-B-T-0-D-S-S-D-s-
+q34-(-B-0-0-q32-(-B-0-(-D-S-S-D-M-
+q34-Q-B-0-0-q35-Q-B-0-Q-D-S-S-D-s-
+q34-R-B-0-0-q35-R-B-0-R-D-S-S-D-s-
+q34-S-B-0-0-q35-S-B-0-S-D-S-S-D-s-
+q34-T-B-0-0-q35-T-B-0-T-D-S-S-D-s-
 q35-)-B-0-0-q36-)-B-0-)-D-S-S-D-m-
 q36-contador-q37-q38-
 q37-0-B-0-0-q24-0-B-0-0-S-D-S-S-s-

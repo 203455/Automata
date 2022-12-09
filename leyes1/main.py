@@ -586,6 +586,6 @@ def validar(tipo):
 
 
 if __name__ == "__main__":
-    resultados = obtenerSentencia(4, '(SuR)nZ', True)
+    resultados = obtenerSentencia(6, '(SuR)u(SuR)', True)
     print(resultados)
     pass
