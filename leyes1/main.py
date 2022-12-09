@@ -7,10 +7,22 @@ import random
 cadenaEntrada = []
 cadenaSalida = []
 cadenaAuxiliar = []
+cadenaEntradaRed = []
+cadenaSalidaRed = []
+cadenaA = [] 
+cadenaB = []
+cadenaC = []
 items = []
 transiciones = []
 
 #Las siguientes direcciones deben ser cambiadas según sea el caso de usabilidad de manera local
+transicionesReduccion = [
+    'D:/7mo Cuatri/Lenguajes y Automatas/Automata/leyes1/reduccion2_6.txt'
+]
+
+parametrosreduccion = [
+    'D:/7mo Cuatri/Lenguajes y Automatas/Automata/leyes1/parametrosReduccion2_6.txt'
+]
 
 transicionesUrls = ["D:/7mo Cuatri/Lenguajes y Automatas/Automata/leyes1/ley1.txt",
                     "D:/7mo Cuatri/Lenguajes y Automatas/Automata/leyes1/ley2.txt",
@@ -32,6 +44,12 @@ def capturarTransiciones(indicador):
     with open(transicionesUrls[indicador-1], "r") as archivo:
         for linea in archivo:
             transiciones.append(str(linea))
+            
+def capturarTransicionesRed(indicador):
+    transiciones.clear()
+    with open(transicionesReduccion[indicador-1], "r") as archivo:
+        for linea in archivo:
+            transiciones.append(str(linea))
 
 def obtenerParametros(indicador):
     parametros = []
@@ -41,17 +59,36 @@ def obtenerParametros(indicador):
             parametros.append(str(palabra[1]))
     return parametros
 
+def obtenerParametrosRed(indicador):
+    parametros = []
+    with open(parametrosreduccion[indicador-1], "r") as archivo:
+        for linea in archivo:
+            palabra=linea.split("-")
+            parametros.append(str(palabra[1]))
+    return parametros
+
 def itemsToCadena():
     cadenaEntrada.clear()
     cadenaSalida.clear()
     cadenaAuxiliar.clear()
+    cadenaEntradaRed.clear()
+    cadenaSalidaRed.clear()
+    cadenaA.clear()
+    cadenaB.clear()
+    cadenaC.clear()
     num = 0
-    for i in range(20):
+    for i in range(50):
         cadenaEntrada.append('0')
         cadenaSalida.append('0')
         cadenaAuxiliar.append('0')
+        cadenaEntradaRed.append('0')
+        cadenaSalidaRed.append('0')
+        cadenaA.append('0')
+        cadenaB.append('0')
+        cadenaC.append('0')
     
     for item in items:
+        cadenaEntradaRed[num] = item
         cadenaEntrada[num] = item
         num = num +1   
         
@@ -165,8 +202,155 @@ def mt(indicador):
         print('No es posible')
         return "No es posible hacer la operación"
 
+def mtReduccion(indicador):
+    posicion1 = 0
+    posicion2 = 0
+    posicion3 = 0
+    posicion4 = 0
+    posicion5 = 0
+    itemsToCadena()
+    capturarTransicionesRed(indicador)
+    parametros = obtenerParametrosRed(indicador)
+    inicial = str(parametros[1])
+    cintas = str(parametros[0])
+    finales = []
+    inicio = 0
+    for final in parametros:
+        if inicio > 1:
+            finales.append(str(final))
+        inicio=inicio+1
+    actual = inicial
+    correcto=False
+    finalizar = False
+    contador = 0
+    
+    
+    while finalizar == False:
+        correcto = False
+        print(actual)
+        print(cintas)
+        print(contador)
+        print(cadenaEntradaRed)
+        print(cadenaSalidaRed)
+        print(cadenaA)
+        print(cadenaB)
+        if cintas == '3':
+            for transicion in transiciones:
+                t=transicion.split("-")
+                if actual == t[0]:
+                    if cadenaEntrada[posicion1] == t[1]:
+                        if cadenaSalida[posicion2] == t[2]:
+                            actual=t[3]
+                            cadenaEntrada[posicion1] = t[4]
+                            cadenaSalida[posicion2] = t[5]
+                            if t[6] == 'D':
+                                posicion1 = posicion1+1
+                            elif t[6] == 'I':
+                                posicion1 = posicion1-1
+                            elif t[6] == 'S':
+                                posicion1 = posicion1
+                            
+                            if t[7] == 'D':
+                                posicion2 = posicion2+1
+                            elif t[7] == 'I':
+                                posicion2 = posicion2-1
+                            elif t[7] == 'S':
+                                posicion2 = posicion2
+                            correcto=True
+                            for fin in finales:
+                                if actual == fin:
+                                    finalizar = True
+                                    break
+                            break 
+        if cintas == '4':
+            for transicion in transiciones:
+                t=transicion.split("-")
+                if actual == t[0]:
+                    if t[1] == 'contador':
+                        if contador == 0:
+                            actual=t[2]
+                        else:
+                            actual=t[3]
+                        correcto=True
+                        for fin in finales:
+                            if actual == fin:
+                                finalizar = True
+                                break
+                        break 
+                        
+                    else:
+                        if cadenaEntradaRed[posicion1] == t[1]:
+                            if cadenaSalidaRed[posicion2] == t[2]:
+                                if cadenaA[posicion3] == t[3]:
+                                    if cadenaB[posicion4] == t[4]:
+                                        actual=t[5]
+                                        cadenaEntradaRed[posicion1] = t[6]
+                                        cadenaSalidaRed[posicion2] = t[7]
+                                        cadenaA[posicion3]= t[8]
+                                        cadenaB[posicion4] = t[9]
+                                        if t[10] == 'D':
+                                            posicion1 = posicion1+1
+                                        elif t[10] == 'I':
+                                            posicion1 = posicion1-1
+                                        elif t[10] == 'S':
+                                            posicion1 = posicion1
+                                        
+                                        if t[11] == 'D':
+                                            posicion2 = posicion2+1
+                                        elif t[11] == 'I':
+                                            posicion2 = posicion2-1
+                                        elif t[11] == 'S':
+                                            posicion2 = posicion2
+                                        
+                                        if t[12] == 'D':
+                                            posicion3 = posicion3+1
+                                        elif t[12] == 'I':
+                                            posicion3 = posicion3-1
+                                        elif t[12] == 'S':
+                                            posicion3 = posicion3
+                                        
+                                        if t[13] == 'D':
+                                            posicion3 = posicion3+1
+                                        elif t[13] == 'I':
+                                            posicion3 = posicion3-1
+                                        elif t[13] == 'S':
+                                            posicion3 = posicion3
+                                        
+                                        if t[14] == 'M':
+                                            contador = contador+1
+                                        elif t[14] == 'm':
+                                            contador = contador-1
+                                        elif t[14] == 's':
+                                            contador = contador
+                                        
+                                        correcto=True
+                                        for fin in finales:
+                                            if actual == fin:
+                                                finalizar = True
+                                                break
+                                        break 
+                
+        if correcto == False:
+            finalizar=True
+    
+    if correcto == True:
+        resultado =  []
+        result = ""
+        for item in cadenaSalidaRed:
+            if item != "0":
+                resultado.append(item)
+            else:
+                break
+        result= ''.join(resultado)
+        print(result)
+        return result
+    else:
+        print('No es posible')
+        return "No es posible hacer la operación"
+
 
 def obtenerSentencia(tipo, sentencia):
+    items.clear()
     for i in sentencia:
         if i != " ":
             items.append(i)
@@ -176,8 +360,8 @@ def obtenerSentencia(tipo, sentencia):
 
 grammarOficial = CFG.fromstring("""
     E -> L
-    L -> P I O I F O I | P I O I F  | P I F | P L O L F O L | L O P L O L F | I | I O I | N I | N L 
-    I -> 'A' | 'B' | 'C' | 'D' | 'Z' | 'E'
+    L -> P I O I F O I | P I O I F  | P I F | P L O L F O L | L O P L O L F | I | I O I | N I | N L | P L O L F
+    I -> 'A' | 'B' | 'C' | 'D' | 'Z' | 'E' | 'R' | 'S' | "T" | 'Q'
     N -> '!' 
     P -> '('
     F -> ')'
@@ -186,7 +370,7 @@ grammarOficial = CFG.fromstring("""
 
 grammarCorto = CFG.fromstring("""
     E -> L
-    L -> I  | I O I | P I O I F O I | P I O I F  | P I F | P L O L F O L | L O P L O L F |  N I | N L 
+    L -> I  | I O I | P I O I F O I | P I O I F  | P I F | P L O L F O L | L O P L O L F |  N I | N L | P L O L F 
     I -> 'A' | 'B' | 'C' | 'D' | 'Z' | 'E'
     N -> '!' 
     P -> '('
@@ -217,7 +401,7 @@ def validar(tipo):
                 otros.append(s)
             iteracion = iteracion + 1
     if valor == True: 
-        resultado = mt(tipo)
+        resultado = mtReduccion(tipo)
         return [[resultado, True], ["".join(otros[0]), False], ["".join(otros[1]), False]]
     
     return  [["No es posible obtener sentencia",True], ["".join(otros[0]), False],["".join(otros[0]), False]]
@@ -226,6 +410,6 @@ def validar(tipo):
 
 
 if __name__ == "__main__":
-    resultados = obtenerSentencia(4, 'AnZ')
+    resultados = obtenerSentencia(1, 'RuR')
     print(resultados)
     pass

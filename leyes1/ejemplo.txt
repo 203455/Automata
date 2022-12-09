@@ -1,0 +1,8 @@
+MT 2 VARIABLES
+
+Estado-ValorCadenaEntrada-ValorCadenaSalida-ValorVariableA-ValorVariableB-NuevoEstado-NuevoValorCadenaEntrada-NuevoValorCadenaSalida-NuevoValorVariableA-NuevoValorVariableB-DireccionEntrada-DireccionSalida-DireccionA-DireccionB-ValorContador-
+
+
+if contador
+
+Estado-contador-EstadoCuandoEsIgualA0-EstadoCuandoEsDistintoA0-
